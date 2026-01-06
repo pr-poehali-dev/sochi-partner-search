@@ -14,15 +14,40 @@ const Index = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      toast({
-        title: "Спасибо за интерес!",
-        description: "Мы свяжемся с вами в ближайшее время.",
+    try {
+      const response = await fetch('https://functions.poehali.dev/5ed915bb-c141-4a78-b5b3-b0dcb704d71d', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, phone }),
       });
-      setName('');
-      setPhone('');
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Спасибо за интерес!",
+          description: "Мы свяжемся с вами в ближайшее время.",
+        });
+        setName('');
+        setPhone('');
+      } else {
+        toast({
+          title: "Ошибка",
+          description: data.error || "Не удалось отправить заявку. Попробуйте позже.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description: "Не удалось отправить заявку. Проверьте подключение к интернету.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
