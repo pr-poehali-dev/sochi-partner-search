@@ -49,6 +49,10 @@ const Index = () => {
               в 2 бизнеса в городе Сочи
             </p>
 
+            <p className="text-xl md:text-2xl font-medium text-blue-200/90 animate-fade-in" style={{ animationDelay: '0.25s' }}>
+              вход 20 миллионов рублей
+            </p>
+
             <div className="h-1 w-32 bg-gradient-to-r from-blue-400 to-slate-500 mx-auto rounded-full animate-scale-in" style={{ animationDelay: '0.3s' }} />
           </div>
 
